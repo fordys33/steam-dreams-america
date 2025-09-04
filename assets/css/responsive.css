@@ -67,6 +67,31 @@
         height: 250px;
     }
 
+    /* Liberty Tribute Section */
+    .liberty-tribute {
+        padding: 60px 0;
+    }
+
+    .tribute-title {
+        font-size: 2em;
+    }
+
+    .tribute-quote {
+        font-size: 1.2em;
+    }
+
+    .tribute-description {
+        font-size: 1em;
+    }
+
+    .tribute-symbols {
+        gap: 20px;
+    }
+
+    .symbol {
+        font-size: 1.5em;
+    }
+
     /* Sections */
     .section {
         padding: 60px 0;
