@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{PAGE_TITLE}} - Steam Dreams America</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{{PAGE_DESCRIPTION}}">
+    <meta name="keywords" content="Steam Dreams America, American Dream, bipartisan, port communities, STEAM education, American renewal">
+    <meta name="author" content="Steam Dreams America">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="{{PAGE_TITLE}} - Steam Dreams America">
+    <meta property="og:description" content="{{PAGE_DESCRIPTION}}">
+    <meta property="og:image" content="{{OG_IMAGE}}">
+    <meta property="og:url" content="{{PAGE_URL}}">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Steam Dreams America">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{PAGE_TITLE}} - Steam Dreams America">
+    <meta name="twitter:description" content="{{PAGE_DESCRIPTION}}">
+    <meta name="twitter:image" content="{{TWITTER_IMAGE}}">
+    <meta name="twitter:site" content="@steamdreamsamerica">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cash.app https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://cash.app;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/blog.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "{{PAGE_TITLE}}",
+      "description": "{{PAGE_DESCRIPTION}}",
+      "image": "{{OG_IMAGE}}",
+      "url": "{{PAGE_URL}}",
+      "author": {
+        "@type": "Organization",
+        "name": "Steam Dreams America"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Steam Dreams America",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://steam-dreams-america.netlify.app/assets/images/logo.png"
+        }
+      },
+      "datePublished": "{{PUBLISH_DATE}}",
+      "dateModified": "{{MODIFIED_DATE}}"
+    }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <h2>🚂 Steam Dreams America</h2>
+                </a>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="blog.html" class="nav-link">Blog</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="communities.html" class="nav-link">Communities</a>
+                <a href="resources.html" class="nav-link">Resources</a>
+                <a href="#support" class="nav-link">Support</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="container">
+            <div class="article-meta">
+                <span class="article-category">{{CATEGORY}}</span>
+                <span class="article-date">{{PUBLISH_DATE}}</span>
+                <span class="read-time">{{READ_TIME}} min read</span>
+            </div>
+            <h1 class="article-title">{{PAGE_TITLE}}</h1>
+            <p class="article-excerpt">{{PAGE_DESCRIPTION}}</p>
+            <div class="article-author">
+                <span class="author-name">Steam Dreams America</span>
+                <span class="author-bio">Growing America the right way through bipartisan collaboration</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article Content -->
+    <main class="article-content">
+        <div class="container">
+            <article class="blog-post">
+                {{ARTICLE_CONTENT}}
+            </article>
+            
+            <!-- Social Share -->
+            <div class="social-share-section">
+                <h3>Share This Article</h3>
+                <p>Help spread the vision of growing America the right way</p>
+                <div class="social-share-buttons">
+                    <button class="share-btn facebook" onclick="shareOnFacebook()">
+                        <span class="icon">📘</span>
+                        <span class="text">Facebook</span>
+                    </button>
+                    <button class="share-btn twitter" onclick="shareOnTwitter()">
+                        <span class="icon">🐦</span>
+                        <span class="text">Twitter</span>
+                    </button>
+                    <button class="share-btn instagram" onclick="shareOnInstagram()">
+                        <span class="icon">📷</span>
+                        <span class="text">Instagram</span>
+                    </button>
+                    <button class="share-btn tiktok" onclick="shareOnTikTok()">
+                        <span class="icon">🎵</span>
+                        <span class="text">TikTok</span>
+                    </button>
+                    <button class="share-btn copy" onclick="copyToClipboard()">
+                        <span class="icon">📋</span>
+                        <span class="text">Copy Link</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Related Articles -->
+            <div class="related-articles">
+                <h3>Related Articles</h3>
+                <div class="articles-grid">
+                    {{RELATED_ARTICLES}}
+                </div>
+            </div>
+            
+            <!-- Newsletter Signup -->
+            <div class="newsletter-signup">
+                <div class="newsletter-content">
+                    <h3>Stay Connected</h3>
+                    <p>Join our community of Americans committed to growing our nation through bipartisan collaboration and grounded leadership.</p>
+                    <form id="newsletter-form" class="newsletter-form">
+                        <input type="email" id="newsletter-email" placeholder="Your email address" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Support Section -->
+    <section id="support" class="support-section">
+        <div class="container">
+            <h2>Support Our Mission</h2>
+            <p>Help us grow America the right way through bipartisan collaboration</p>
+            <div class="support-options">
+                <div class="support-card">
+                    <h3>💰 Support My Studies</h3>
+                    <p>Your donations help fund my education in Germany, allowing me to bring back valuable insights to help America grow the right way.</p>
+                    <button class="btn btn-primary" onclick="openDonationModal()">Donate Now</button>
+                </div>
+                <div class="support-card">
+                    <h3>🤝 Spread the Word</h3>
+                    <p>Share this vision of growing America the right way through bipartisan collaboration and grounded leadership.</p>
+                    <div class="social-share">
+                        <button class="btn btn-social facebook" onclick="shareOnFacebook()">Share on Facebook</button>
+                        <button class="btn btn-social twitter" onclick="shareOnTwitter()">Share on Twitter</button>
+                        <button class="btn btn-social instagram" onclick="shareOnInstagram()">Share on Instagram</button>
+                        <button class="btn btn-social tiktok" onclick="shareOnTikTok()">Share on TikTok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Modal -->
+    <div id="donationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDonationModal()">&times;</span>
+            <h3>Support My Studies in Germany</h3>
+            <div class="modal-body">
+                <p>Your donations help fund my education abroad, allowing me to bring back valuable insights to help America grow the right way through bipartisan collaboration.</p>
+                <p>Choose your donation amount:</p>
+                <div class="donation-amounts">
+                    <button class="btn btn-donation" onclick="selectAmount(25)">$25</button>
+                    <button class="btn btn-donation" onclick="selectAmount(50)">$50</button>
+                    <button class="btn btn-donation" onclick="selectAmount(100)">$100</button>
+                    <button class="btn btn-donation" onclick="selectAmount(250)">$250</button>
+                    <button class="btn btn-donation" onclick="selectAmount(500)">$500</button>
+                </div>
+                <div class="custom-amount">
+                    <input type="number" id="custom-amount" placeholder="Custom amount">
+                    <button class="btn btn-primary" onclick="processDonation()">Donate via Cash App</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Steam Dreams America</h3>
+                    <p>Growing America the right way through bipartisan collaboration and grounded leadership.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="communities.html">Communities</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#" onclick="openDonationModal()">Donate</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="#support">Get Involved</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Steam Dreams America. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/blog.js"></script>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+</body>
+</html>
