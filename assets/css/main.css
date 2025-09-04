@@ -526,6 +526,30 @@ body {
     color: white;
 }
 
+.btn-social.instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+}
+
+.btn-social.tiktok {
+    background: #000000;
+    color: white;
+    position: relative;
+}
+
+.btn-social.tiktok::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, #25f4ee 0%, #fe2c55 50%, #25f4ee 100%);
+    border-radius: 50px;
+    z-index: -1;
+    opacity: 0.8;
+}
+
 /* Footer */
 .footer {
     background: #2c3e50;

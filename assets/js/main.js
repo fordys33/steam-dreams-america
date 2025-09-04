@@ -256,6 +256,30 @@ function initializeSocialSharing() {
         window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
         trackEvent('social_share', 'engagement', 'twitter');
     };
+    
+    // Instagram sharing
+    window.shareOnInstagram = function() {
+        const text = 'Transform America\'s ports into opportunity engines through STEAM education. Join Steam Dreams America! #SteamDreamsAmerica #PortCommunities #STEAMEducation';
+        // Instagram doesn't support direct URL sharing, so we copy text to clipboard
+        navigator.clipboard.writeText(text).then(() => {
+            showMessage('Text copied! Open Instagram and paste in your story or post.', 'success');
+        }).catch(() => {
+            showMessage('Transform America\'s ports into opportunity engines through STEAM education. Join Steam Dreams America! #SteamDreamsAmerica #PortCommunities #STEAMEducation', 'info');
+        });
+        trackEvent('social_share', 'engagement', 'instagram');
+    };
+    
+    // TikTok sharing
+    window.shareOnTikTok = function() {
+        const text = 'Transform America\'s ports into opportunity engines through STEAM education. Join Steam Dreams America! #SteamDreamsAmerica #PortCommunities #STEAMEducation #WorkingClass';
+        // TikTok doesn't support direct URL sharing, so we copy text to clipboard
+        navigator.clipboard.writeText(text).then(() => {
+            showMessage('Text copied! Open TikTok and paste in your video description.', 'success');
+        }).catch(() => {
+            showMessage('Transform America\'s ports into opportunity engines through STEAM education. Join Steam Dreams America! #SteamDreamsAmerica #PortCommunities #STEAMEducation #WorkingClass', 'info');
+        });
+        trackEvent('social_share', 'engagement', 'tiktok');
+    };
 }
 
 // Modal functions
