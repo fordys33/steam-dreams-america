@@ -32,8 +32,14 @@
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
     
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="assets/css/main.css" as="style">
+    <link rel="preload" href="assets/js/main.js" as="script">
+    
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="assets/css/simple.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
     
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -99,14 +105,26 @@
                     </button>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="hero-symbols">
-                    <span class="symbol">🇺🇸</span>
-                    <span class="symbol">🤝</span>
-                    <span class="symbol">🏭</span>
-                    <span class="symbol">🎓</span>
+                            <div class="hero-visual">
+                    <div class="hero-animation">
+                        <div class="steam-pipe"></div>
+                        <div class="steam-pipe"></div>
+                        <div class="steam-pipe"></div>
+                        <div class="steam-pipe"></div>
+                        <div class="steam-gear"></div>
+                        <div class="steam-gear"></div>
+                        <div class="steam-gear"></div>
+                        <div class="steam-puff"></div>
+                        <div class="steam-puff"></div>
+                        <div class="steam-puff"></div>
+                        <div class="leadership-symbols">
+                            <span class="symbol">🇺🇸</span>
+                            <span class="symbol">🤝</span>
+                            <span class="symbol">🏭</span>
+                            <span class="symbol">🎓</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
         </div>
     </header>
 
@@ -395,7 +413,9 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="assets/js/simple.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/api.js"></script>
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>

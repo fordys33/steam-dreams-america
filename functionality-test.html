@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functionality Test - Steam Dreams America</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+        .test-result { margin: 10px 0; padding: 10px; border-radius: 4px; }
+        .pass { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .fail { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+        input { padding: 8px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Steam Dreams America - Functionality Test</h1>
+    
+    <div class="test-section">
+        <h2>Core Functions Test</h2>
+        <div id="core-results"></div>
+        <button onclick="testCoreFunctions()">Test Core Functions</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>Form Validation Test</h2>
+        <input type="email" id="test-email" placeholder="Enter email to test">
+        <button onclick="testEmailValidation()">Test Email Validation</button>
+        <div id="email-results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Modal Functions Test</h2>
+        <button onclick="testModals()">Test Modal Functions</button>
+        <div id="modal-results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Social Sharing Test</h2>
+        <button onclick="testSocialSharing()">Test Social Sharing</button>
+        <div id="social-results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Donation Functions Test</h2>
+        <button onclick="testDonationFunctions()">Test Donation Functions</button>
+        <div id="donation-results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Location Functions Test</h2>
+        <button onclick="testLocationFunctions()">Test Location Functions</button>
+        <div id="location-results"></div>
+    </div>
+
+    <script>
+        function addResult(containerId, message, passed) {
+            const container = document.getElementById(containerId);
+            const div = document.createElement('div');
+            div.className = `test-result ${passed ? 'pass' : 'fail'}`;
+            div.textContent = message;
+            container.appendChild(div);
+        }
+        
+        function testCoreFunctions() {
+            const container = document.getElementById('core-results');
+            container.innerHTML = '';
+            
+            // Test if main functions exist
+            const functions = ['validateEmail', 'sanitizeInput', 'showMessage', 'showLoading'];
+            let allPassed = true;
+            
+            functions.forEach(func => {
+                if (typeof window[func] === 'function') {
+                    addResult('core-results', `✓ ${func} function exists`, true);
+                } else {
+                    addResult('core-results', `✗ ${func} function missing`, false);
+                    allPassed = false;
+                }
+            });
+            
+            addResult('core-results', allPassed ? '✓ All core functions present' : '✗ Some core functions missing', allPassed);
+        }
+        
+        function testEmailValidation() {
+            const email = document.getElementById('test-email').value;
+            const container = document.getElementById('email-results');
+            container.innerHTML = '';
+            
+            if (!email) {
+                addResult('email-results', 'Please enter an email address', false);
+                return;
+            }
+            
+            // Test email validation
+            const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            addResult('email-results', `Email validation: ${isValid ? 'Valid' : 'Invalid'}`, isValid);
+            
+            // Test sanitization
+            const sanitized = email.replace(/[<>]/g, '').trim();
+            addResult('email-results', `Sanitized: ${sanitized}`, true);
+        }
+        
+        function testModals() {
+            const container = document.getElementById('modal-results');
+            container.innerHTML = '';
+            
+            // Test if modal functions exist
+            const modalFunctions = ['openLocationModal', 'closeLocationModal', 'openDonationModal', 'closeDonationModal'];
+            let allPassed = true;
+            
+            modalFunctions.forEach(func => {
+                if (typeof window[func] === 'function') {
+                    addResult('modal-results', `✓ ${func} function exists`, true);
+                } else {
+                    addResult('modal-results', `✗ ${func} function missing`, false);
+                    allPassed = false;
+                }
+            });
+            
+            addResult('modal-results', allPassed ? '✓ All modal functions present' : '✗ Some modal functions missing', allPassed);
+        }
+        
+        function testSocialSharing() {
+            const container = document.getElementById('social-results');
+            container.innerHTML = '';
+            
+            // Test if social sharing functions exist
+            const socialFunctions = ['shareOnFacebook', 'shareOnTwitter', 'shareOnInstagram', 'shareOnTikTok'];
+            let allPassed = true;
+            
+            socialFunctions.forEach(func => {
+                if (typeof window[func] === 'function') {
+                    addResult('social-results', `✓ ${func} function exists`, true);
+                } else {
+                    addResult('social-results', `✗ ${func} function missing`, false);
+                    allPassed = false;
+                }
+            });
+            
+            addResult('social-results', allPassed ? '✓ All social sharing functions present' : '✗ Some social sharing functions missing', allPassed);
+        }
+        
+        function testDonationFunctions() {
+            const container = document.getElementById('donation-results');
+            container.innerHTML = '';
+            
+            // Test if donation functions exist
+            const donationFunctions = ['selectAmount', 'processDonation'];
+            let allPassed = true;
+            
+            donationFunctions.forEach(func => {
+                if (typeof window[func] === 'function') {
+                    addResult('donation-results', `✓ ${func} function exists`, true);
+                } else {
+                    addResult('donation-results', `✗ ${func} function missing`, false);
+                    allPassed = false;
+                }
+            });
+            
+            addResult('donation-results', allPassed ? '✓ All donation functions present' : '✗ Some donation functions missing', allPassed);
+        }
+        
+        function testLocationFunctions() {
+            const container = document.getElementById('location-results');
+            container.innerHTML = '';
+            
+            // Test if location functions exist
+            const locationFunctions = ['getCurrentLocation', 'submitLocation'];
+            let allPassed = true;
+            
+            locationFunctions.forEach(func => {
+                if (typeof window[func] === 'function') {
+                    addResult('location-results', `✓ ${func} function exists`, true);
+                } else {
+                    addResult('location-results', `✗ ${func} function missing`, false);
+                    allPassed = false;
+                }
+            });
+            
+            // Test geolocation support
+            if (navigator.geolocation) {
+                addResult('location-results', '✓ Geolocation API supported', true);
+            } else {
+                addResult('location-results', '✗ Geolocation API not supported', false);
+                allPassed = false;
+            }
+            
+            addResult('location-results', allPassed ? '✓ All location functions present' : '✗ Some location functions missing', allPassed);
+        }
+        
+        // Auto-run core function test on load
+        window.addEventListener('load', testCoreFunctions);
+    </script>
+</body>
+</html>
