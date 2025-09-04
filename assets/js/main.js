@@ -1,4 +1,4 @@
-// Main JavaScript for Steam Dreams America
+// Enhanced Main JavaScript for Steam Dreams America
 
 // Global variables
 let selectedDonationAmount = 0;
@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeAnalytics();
     initializeEmailSignup();
     initializeSocialSharing();
+    initializeAnimations();
+    initializeModals();
 });
 
 // Navigation functionality
@@ -53,9 +55,50 @@ function initializeNavigation() {
     window.addEventListener('scroll', function() {
         const navbar = document.getElementById('navbar');
         if (window.scrollY > 100) {
-            navbar.style.background = 'rgba(44, 62, 80, 0.98)';
+            navbar.classList.add('scrolled');
         } else {
-            navbar.style.background = 'rgba(44, 62, 80, 0.95)';
+            navbar.classList.remove('scrolled');
+        }
+    });
+}
+
+// Animation functionality
+function initializeAnimations() {
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.querySelectorAll('.mission-card, .approach-phase, .impact-card, .support-card').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+// Modal functionality
+function initializeModals() {
+    // Close modals when clicking outside
+    window.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal')) {
+            e.target.style.display = 'none';
+        }
+    });
+
+    // Close modals with escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.style.display = 'none';
+            });
         }
     });
 }
@@ -82,25 +125,32 @@ function validateDonationAmount(amount) {
     return !isNaN(num) && num > 0 && num <= 10000; // Max $10,000
 }
 
-function isRateLimited() {
+function isRateLimited(action = 'donation', limit = 5, windowMs = 60000) {
     const now = Date.now();
-    const key = 'donation_attempts';
+    const key = `${action}_${getClientId()}`;
     
     if (!rateLimitStore[key]) {
         rateLimitStore[key] = [];
     }
     
-    // Remove attempts older than 1 hour
-    rateLimitStore[key] = rateLimitStore[key].filter(time => now - time < 3600000);
+    // Remove attempts older than window
+    rateLimitStore[key] = rateLimitStore[key].filter(time => now - time < windowMs);
     
     // Check if too many attempts
-    if (rateLimitStore[key].length >= 5) {
+    if (rateLimitStore[key].length >= limit) {
         return true;
     }
     
     // Add current attempt
     rateLimitStore[key].push(now);
     return false;
+}
+
+function getClientId() {
+    if (!localStorage.getItem('clientId')) {
+        localStorage.setItem('clientId', Math.random().toString(36).substr(2, 9));
+    }
+    return localStorage.getItem('clientId');
 }
 
 function logDonationAttempt(amount, emailStatus) {
@@ -216,6 +266,11 @@ function initializeEmailSignup() {
             const email = document.getElementById('email-input').value;
             const zip = document.getElementById('zip-input').value;
             
+            if (isRateLimited('email_signup')) {
+                showMessage('Please wait before submitting another email signup.', 'error');
+                return;
+            }
+            
             if (!validateEmail(email)) {
                 showMessage('Please enter a valid email address.', 'error');
                 return;
@@ -244,7 +299,7 @@ function initializeSocialSharing() {
     // Facebook sharing
     window.shareOnFacebook = function() {
         const url = encodeURIComponent(window.location.href);
-        const text = encodeURIComponent('Transform America\'s ports into opportunity engines through STEAM education. Join Steam Dreams America!');
+        const text = encodeURIComponent('Transform America\'s ports into opportunity engines through STEAM education and bipartisan collaboration. Join Steam Dreams America!');
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
         trackEvent('social_share', 'engagement', 'facebook');
     };
@@ -252,66 +307,55 @@ function initializeSocialSharing() {
     // Twitter sharing
     window.shareOnTwitter = function() {
         const url = encodeURIComponent(window.location.href);
-        const text = encodeURIComponent('Transform America\'s ports into opportunity engines through STEAM education. Join Steam Dreams America! #SteamDreamsAmerica #AmericanRenewal');
+        const text = encodeURIComponent('Transform America\'s ports into opportunity engines through STEAM education and bipartisan collaboration. Join Steam Dreams America! #SteamDreamsAmerica #AmericanRenewal');
         window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
         trackEvent('social_share', 'engagement', 'twitter');
     };
     
     // Instagram sharing
     window.shareOnInstagram = function() {
-        const text = 'Transform America\'s ports into opportunity engines through STEAM education. Join Steam Dreams America! #SteamDreamsAmerica #PortCommunities #STEAMEducation';
-        // Instagram doesn't support direct URL sharing, so we copy text to clipboard
+        const text = 'Transform America\'s ports into opportunity engines through STEAM education and bipartisan collaboration. Join Steam Dreams America! #SteamDreamsAmerica #PortCommunities #STEAMEducation #BipartisanCollaboration';
         navigator.clipboard.writeText(text).then(() => {
             showMessage('Text copied! Open Instagram and paste in your story or post.', 'success');
         }).catch(() => {
-            showMessage('Transform America\'s ports into opportunity engines through STEAM education. Join Steam Dreams America! #SteamDreamsAmerica #PortCommunities #STEAMEducation', 'info');
+            showMessage('Transform America\'s ports into opportunity engines through STEAM education and bipartisan collaboration. Join Steam Dreams America! #SteamDreamsAmerica #PortCommunities #STEAMEducation #BipartisanCollaboration', 'info');
         });
         trackEvent('social_share', 'engagement', 'instagram');
     };
     
     // TikTok sharing
     window.shareOnTikTok = function() {
-        const text = 'Transform America\'s ports into opportunity engines through STEAM education. Join Steam Dreams America! #SteamDreamsAmerica #PortCommunities #STEAMEducation #WorkingClass';
-        // TikTok doesn't support direct URL sharing, so we copy text to clipboard
+        const text = 'Transform America\'s ports into opportunity engines through STEAM education and bipartisan collaboration. Join Steam Dreams America! #SteamDreamsAmerica #PortCommunities #STEAMEducation #BipartisanCollaboration';
         navigator.clipboard.writeText(text).then(() => {
             showMessage('Text copied! Open TikTok and paste in your video description.', 'success');
         }).catch(() => {
-            showMessage('Transform America\'s ports into opportunity engines through STEAM education. Join Steam Dreams America! #SteamDreamsAmerica #PortCommunities #STEAMEducation #WorkingClass', 'info');
+            showMessage('Transform America\'s ports into opportunity engines through STEAM education and bipartisan collaboration. Join Steam Dreams America! #SteamDreamsAmerica #PortCommunities #STEAMEducation #BipartisanCollaboration', 'info');
         });
         trackEvent('social_share', 'engagement', 'tiktok');
     };
 }
 
 // Modal functions
-function openLocationModal() {
+window.openLocationModal = function() {
     document.getElementById('locationModal').style.display = 'block';
     trackEvent('modal_open', 'engagement', 'location');
-}
+};
 
-function closeLocationModal() {
+window.closeLocationModal = function() {
     document.getElementById('locationModal').style.display = 'none';
-}
+};
 
-function openRepFinder() {
-    document.getElementById('repModal').style.display = 'block';
-    trackEvent('modal_open', 'engagement', 'representatives');
-}
-
-function closeRepModal() {
-    document.getElementById('repModal').style.display = 'none';
-}
-
-function openDonationModal() {
+window.openDonationModal = function() {
     document.getElementById('donationModal').style.display = 'block';
     trackEvent('modal_open', 'engagement', 'donation');
-}
+};
 
-function closeDonationModal() {
+window.closeDonationModal = function() {
     document.getElementById('donationModal').style.display = 'none';
-}
+};
 
 // Location functions
-function getCurrentLocation() {
+window.getCurrentLocation = function() {
     if (navigator.geolocation) {
         showLoading('port-results', 'Getting your location...');
         navigator.geolocation.getCurrentPosition(
@@ -329,9 +373,9 @@ function getCurrentLocation() {
     } else {
         showMessage('Geolocation is not supported by this browser.', 'error');
     }
-}
+};
 
-function submitLocation() {
+window.submitLocation = function() {
     const location = document.getElementById('manual-location').value;
     if (location.trim()) {
         closeLocationModal();
@@ -341,7 +385,7 @@ function submitLocation() {
     } else {
         showMessage('Please enter a location.', 'error');
     }
-}
+};
 
 function findPortsByLocation(location) {
     // Simulate API call to find nearby ports
@@ -474,7 +518,7 @@ function displayRepresentativeResults(reps) {
 }
 
 // Donation functions
-function selectAmount(amount) {
+window.selectAmount = function(amount) {
     selectedDonationAmount = amount;
     
     // Update button styles
@@ -486,9 +530,9 @@ function selectAmount(amount) {
     
     // Update custom amount field
     document.getElementById('custom-amount').value = amount;
-}
+};
 
-function processDonation() {
+window.processDonation = function() {
     const customAmount = document.getElementById('custom-amount').value;
     const amount = customAmount || selectedDonationAmount;
     
@@ -497,7 +541,7 @@ function processDonation() {
         return;
     }
     
-    if (isRateLimited()) {
+    if (isRateLimited('donation')) {
         showMessage('Too many donation attempts. Please try again later.', 'error');
         return;
     }
@@ -513,7 +557,7 @@ function processDonation() {
     closeDonationModal();
     
     showMessage('Thank you for your support! You\'ve been redirected to Cash App to complete your donation.', 'success');
-}
+};
 
 // Utility functions
 function showLoading(elementId, message) {
@@ -529,7 +573,7 @@ function showLoading(elementId, message) {
 }
 
 function showMessage(message, type) {
-    const alertClass = type === 'error' ? 'alert-danger' : 'alert-success';
+    const alertClass = type === 'error' ? 'alert-danger' : type === 'success' ? 'alert-success' : 'alert-info';
     const alertDiv = document.createElement('div');
     alertDiv.className = `alert ${alertClass}`;
     alertDiv.textContent = message;
@@ -543,31 +587,21 @@ function showMessage(message, type) {
     }, 5000);
 }
 
-// Close modals when clicking outside
-window.onclick = function(event) {
-    const modals = document.querySelectorAll('.modal');
-    modals.forEach(modal => {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
-};
-
 // Action functions (placeholder implementations)
-function joinPortCommunity(portId) {
+window.joinPortCommunity = function(portId) {
     trackEvent('port_join', 'engagement', portId);
     showMessage('Thank you for joining the port community! You\'ll receive updates about opportunities.', 'success');
-}
+};
 
-function contactPort(portId) {
+window.contactPort = function(portId) {
     trackEvent('port_contact', 'engagement', portId);
     showMessage('Port contact information has been sent to your email.', 'success');
-}
+};
 
-function viewPortDetails(portId) {
+window.viewPortDetails = function(portId) {
     trackEvent('port_details', 'engagement', portId);
     showMessage('Port details page will be available soon.', 'info');
-}
+};
 
 function emailRepresentative(repId) {
     trackEvent('rep_email', 'engagement', repId);
@@ -582,4 +616,31 @@ function callRepresentative(repId) {
 function viewRepProfile(repId) {
     trackEvent('rep_profile', 'engagement', repId);
     showMessage('Representative profile will be available soon.', 'info');
+}
+
+// Mock data functions
+function getPortsByLocation(location) {
+    // Mock port data
+    return [
+        {
+            id: 'port1',
+            name: 'Port of Los Angeles',
+            description: 'Major port with STEAM education programs and maritime training opportunities.'
+        },
+        {
+            id: 'port2',
+            name: 'Port of Long Beach',
+            description: 'Innovative port community with engineering labs and technology training.'
+        },
+        {
+            id: 'port3',
+            name: 'Port of San Diego',
+            description: 'Growing port with art integration and mathematics focus programs.'
+        }
+    ];
+}
+
+function getPortsByCoordinates(lat, lng) {
+    // Mock port data based on coordinates
+    return getPortsByLocation('current location');
 }

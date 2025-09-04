@@ -386,6 +386,262 @@ body::before {
     100% { transform: translateX(100%) rotate(45deg); }
 }
 
+/* Hero Animation Styles */
+.hero-animation {
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(45deg, transparent, rgba(244, 244, 244, 0.1), transparent);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(244, 244, 244, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.leadership-symbols {
+    display: flex;
+    gap: 40px;
+    animation: float 4s ease-in-out infinite;
+}
+
+.leadership-symbols .symbol {
+    font-size: 3em;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+    animation: pulse 3s ease-in-out infinite;
+}
+
+.leadership-symbols .symbol:nth-child(1) { animation-delay: 0s; }
+.leadership-symbols .symbol:nth-child(2) { animation-delay: 0.5s; }
+.leadership-symbols .symbol:nth-child(3) { animation-delay: 1s; }
+.leadership-symbols .symbol:nth-child(4) { animation-delay: 1.5s; }
+
+/* Mission Section Styles */
+.mission-section {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #b22234 100%);
+    color: white;
+    position: relative;
+}
+
+.mission-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.15)"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>');
+    opacity: 0.4;
+}
+
+.mission-section .section-header {
+    position: relative;
+    z-index: 2;
+}
+
+.mission-section .section-header h2 {
+    color: #f4f4f4;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.mission-section .section-header p {
+    color: #e0e0e0;
+}
+
+.mission-content {
+    position: relative;
+    z-index: 2;
+}
+
+.mission-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.mission-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 40px 30px;
+    border-radius: 15px;
+    text-align: center;
+    border: 2px solid rgba(244, 244, 244, 0.2);
+    transition: all 0.3s ease;
+}
+
+.mission-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #b22234;
+    box-shadow: 0 15px 40px rgba(178, 34, 52, 0.3);
+}
+
+.mission-card .card-icon {
+    font-size: 3em;
+    margin-bottom: 20px;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.mission-card h3 {
+    font-size: 1.5em;
+    color: #f4f4f4;
+    margin-bottom: 15px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.mission-card p {
+    color: #e0e0e0;
+    line-height: 1.6;
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+/* Approach Timeline Styles */
+.approach-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.approach-timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.approach-timeline::before {
+    content: '';
+    position: absolute;
+    left: 50px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, #1e3c72, #2a5298, #b22234);
+    border-radius: 2px;
+}
+
+.approach-phase {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.approach-phase .phase-number {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #1e3c72, #2a5298, #b22234);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    font-weight: bold;
+    margin-right: 40px;
+    flex-shrink: 0;
+    box-shadow: 0 10px 30px rgba(30, 60, 114, 0.3);
+    border: 3px solid #f4f4f4;
+}
+
+.approach-phase .phase-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    border-left: 4px solid #b22234;
+}
+
+.approach-phase .phase-content h3 {
+    font-size: 1.8em;
+    color: #1e3c72;
+    margin-bottom: 15px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-weight: bold;
+}
+
+.approach-phase .phase-content p {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.approach-phase .phase-metrics {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.approach-phase .metric {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 500;
+    border: 1px solid #b22234;
+}
+
+/* Impact Grid Styles */
+.impact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.impact-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 40px 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.impact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #1e3c72 0%, #2a5298 50%, #b22234 100%);
+}
+
+.impact-card:hover {
+    transform: translateY(-10px);
+    border-color: #b22234;
+    box-shadow: 0 15px 40px rgba(178, 34, 52, 0.2);
+}
+
+.impact-card .card-icon {
+    font-size: 3em;
+    margin-bottom: 20px;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.impact-card h3 {
+    font-size: 1.5em;
+    color: #1e3c72;
+    margin-bottom: 15px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-weight: bold;
+}
+
+.impact-card p {
+    color: #2c3e50;
+    line-height: 1.6;
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
 /* About Me Page Specific Styles */
 .about-hero-image {
     width: 100%;
@@ -501,7 +757,7 @@ body::before {
     font-family: 'Georgia', 'Times New Roman', serif;
 }
 
-/* Responsive adjustments for About Me page */
+/* Responsive adjustments for new sections */
 @media (max-width: 768px) {
     .leadership-symbols {
         gap: 20px;
@@ -509,6 +765,29 @@ body::before {
     
     .leadership-symbols .symbol {
         font-size: 2em;
+    }
+    
+    .mission-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .approach-timeline::before {
+        left: 30px;
+    }
+    
+    .approach-phase .phase-number {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5em;
+        margin-right: 20px;
+    }
+    
+    .approach-phase .phase-content {
+        padding: 20px;
+    }
+    
+    .impact-grid {
+        grid-template-columns: 1fr;
     }
     
     .leadership-principles {
