@@ -312,13 +312,13 @@
                 </div>
                 
                 <div class="support-options">
-                    <div class="support-card">
-                        <h3>💰 Make a Donation</h3>
-                        <p>Support Steam Dreams America through secure Cash App donations</p>
-                        <button class="btn btn-primary" onclick="openDonationModal()">
-                            Donate Now
-                        </button>
-                    </div>
+                                         <div class="support-card">
+                         <h3>💰 Make a Donation</h3>
+                         <p>Support Steam Dreams America through secure Cash App donations. Your contributions help fund food and living expenses while studying in Germany to bring this vision back to America.</p>
+                         <button class="btn btn-primary" onclick="openDonationModal()">
+                             Donate Now
+                         </button>
+                     </div>
                     
                     <div class="support-card">
                         <h3>📧 Stay Updated</h3>
@@ -370,26 +370,27 @@
         </div>
     </div>
 
-    <div id="donationModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeDonationModal()">&times;</span>
-            <h3>Support Steam Dreams America</h3>
-            <div class="modal-body">
-                <p>Choose your donation amount:</p>
-                <div class="donation-amounts">
-                    <button class="btn btn-donation" onclick="selectAmount(25)">$25</button>
-                    <button class="btn btn-donation" onclick="selectAmount(50)">$50</button>
-                    <button class="btn btn-donation" onclick="selectAmount(100)">$100</button>
-                    <button class="btn btn-donation" onclick="selectAmount(250)">$250</button>
-                    <button class="btn btn-donation" onclick="selectAmount(500)">$500</button>
-                </div>
-                <div class="custom-amount">
-                    <input type="number" id="custom-amount" placeholder="Custom amount">
-                    <button class="btn btn-primary" onclick="processDonation()">Donate via Cash App</button>
-                </div>
-            </div>
-        </div>
-    </div>
+         <div id="donationModal" class="modal">
+         <div class="modal-content">
+             <span class="close" onclick="closeDonationModal()">&times;</span>
+             <h3>Support Steam Dreams America</h3>
+             <div class="modal-body">
+                 <p>Your donations help fund food and living expenses while studying in Germany to bring this vision back to America.</p>
+                 <p>Choose your donation amount:</p>
+                 <div class="donation-amounts">
+                     <button class="btn btn-donation" onclick="selectAmount(25)">$25</button>
+                     <button class="btn btn-donation" onclick="selectAmount(50)">$50</button>
+                     <button class="btn btn-donation" onclick="selectAmount(100)">$100</button>
+                     <button class="btn btn-donation" onclick="selectAmount(250)">$250</button>
+                     <button class="btn btn-donation" onclick="selectAmount(500)">$500</button>
+                 </div>
+                 <div class="custom-amount">
+                     <input type="number" id="custom-amount" placeholder="Custom amount">
+                     <button class="btn btn-primary" onclick="processDonation()">Donate via Cash App</button>
+                 </div>
+             </div>
+         </div>
+     </div>
 
     <!-- Footer -->
     <footer class="footer">
