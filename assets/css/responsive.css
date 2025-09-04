@@ -1,0 +1,380 @@
+/* Responsive Design for Steam Dreams America */
+
+/* Mobile First Approach */
+@media (max-width: 768px) {
+    /* Navigation */
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: rgba(44, 62, 80, 0.95);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        backdrop-filter: blur(10px);
+        padding: 20px 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav-toggle.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .nav-toggle.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Hero Section */
+    .hero {
+        padding: 100px 0 60px;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+
+    .title-main {
+        font-size: 2.5em;
+    }
+
+    .title-subtitle {
+        font-size: 1.4em;
+    }
+
+    .hero-description {
+        font-size: 1.1em;
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .steam-animation {
+        height: 250px;
+    }
+
+    /* Sections */
+    .section {
+        padding: 60px 0;
+    }
+
+    .section-header h2 {
+        font-size: 2.2em;
+    }
+
+    .section-header p {
+        font-size: 1.1em;
+    }
+
+    /* Vision Grid */
+    .vision-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .vision-card {
+        padding: 30px 20px;
+    }
+
+    /* Phases Timeline */
+    .phases-timeline::before {
+        left: 30px;
+    }
+
+    .phase-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .phase-number {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5em;
+        margin: 0 auto 20px;
+    }
+
+    .phase-content {
+        padding: 20px;
+    }
+
+    .phase-metrics {
+        justify-content: center;
+    }
+
+    /* Support Options */
+    .support-options {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .support-card {
+        padding: 30px 20px;
+    }
+
+    /* Footer */
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+
+    /* Buttons */
+    .btn {
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Extra Small Devices */
+    .container {
+        padding: 0 15px;
+    }
+
+    .hero {
+        padding: 80px 0 40px;
+    }
+
+    .title-main {
+        font-size: 2em;
+    }
+
+    .title-subtitle {
+        font-size: 1.2em;
+    }
+
+    .hero-description {
+        font-size: 1em;
+    }
+
+    .section {
+        padding: 40px 0;
+    }
+
+    .section-header h2 {
+        font-size: 1.8em;
+    }
+
+    .vision-card {
+        padding: 25px 15px;
+    }
+
+    .phase-content {
+        padding: 15px;
+    }
+
+    .support-card {
+        padding: 25px 15px;
+    }
+
+    .btn {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+}
+
+/* Tablet Styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .hero-container {
+        gap: 40px;
+    }
+
+    .title-main {
+        font-size: 3em;
+    }
+
+    .vision-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .support-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .phases-timeline {
+        max-width: 700px;
+    }
+}
+
+/* Large Desktop Styles */
+@media (min-width: 1025px) {
+    .hero-container {
+        gap: 80px;
+    }
+
+    .title-main {
+        font-size: 4em;
+    }
+
+    .vision-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .support-options {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Landscape Orientation */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        padding: 80px 0 40px;
+    }
+
+    .hero-container {
+        gap: 30px;
+    }
+
+    .steam-animation {
+        height: 150px;
+    }
+
+    .section {
+        padding: 40px 0;
+    }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .steam-animation {
+        background-image: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    }
+}
+
+/* Print Styles */
+@media print {
+    .navbar,
+    .hero-actions,
+    .modal,
+    .footer {
+        display: none;
+    }
+
+    .hero {
+        padding: 20px 0;
+        background: white;
+        color: black;
+    }
+
+    .title-main {
+        background: none;
+        -webkit-text-fill-color: black;
+        color: black;
+    }
+
+    .section {
+        background: white;
+        padding: 20px 0;
+    }
+
+    .vision-card,
+    .phase-content,
+    .support-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .steam-animation::before {
+        animation: none;
+    }
+
+    .spinner {
+        animation: none;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        color: #ffffff;
+    }
+
+    .section {
+        background: #2d2d2d;
+        color: #ffffff;
+    }
+
+    .section-alt {
+        background: #1a1a1a;
+    }
+
+    .vision-card,
+    .phase-content,
+    .support-card,
+    .port-card,
+    .rep-card {
+        background: #3d3d3d;
+        color: #ffffff;
+    }
+
+    .modal-content {
+        background: #3d3d3d;
+        color: #ffffff;
+    }
+
+    .form-group input {
+        background: #2d2d2d;
+        color: #ffffff;
+        border-color: #555;
+    }
+
+    .form-group input:focus {
+        border-color: #f39c12;
+    }
+}
+
+/* Focus Management */
+@media (any-hover: none) {
+    /* Touch devices */
+    .btn:hover {
+        transform: none;
+    }
+
+    .vision-card:hover,
+    .port-card:hover,
+    .rep-card:hover {
+        transform: none;
+    }
+}
+
+/* Container Queries (Future) */
+@supports (container-type: inline-size) {
+    .vision-card {
+        container-type: inline-size;
+    }
+
+    @container (max-width: 300px) {
+        .vision-card h3 {
+            font-size: 1.2em;
+        }
+    }
+}

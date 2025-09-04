@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function Testing - Steam Dreams America</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .pass {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .fail {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        input {
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Function Testing - Steam Dreams America</h1>
+    
+    <div class="test-section">
+        <h2>Email Validation Tests</h2>
+        <input type="email" id="emailInput" placeholder="Enter email to test">
+        <button onclick="testEmailValidation()">Test Email Validation</button>
+        <div id="emailResults"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Input Sanitization Tests</h2>
+        <input type="text" id="sanitizeInput" placeholder="Enter text with < > tags">
+        <button onclick="testSanitization()">Test Sanitization</button>
+        <div id="sanitizeResults"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Donation Amount Validation Tests</h2>
+        <input type="number" id="donationInput" placeholder="Enter donation amount">
+        <button onclick="testDonationValidation()">Test Donation Validation</button>
+        <div id="donationResults"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Rate Limiting Tests</h2>
+        <button onclick="testRateLimiting()">Test Rate Limiting</button>
+        <div id="rateLimitResults"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Automated Test Suite</h2>
+        <button onclick="runAllTests()">Run All Tests</button>
+        <div id="allTestResults"></div>
+    </div>
+
+    <script>
+        // Import functions from the main file (simplified versions for testing)
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
+        function sanitizeInput(input) {
+            return input.replace(/[<>]/g, '');
+        }
+        
+        function validateDonationAmount(amount) {
+            const num = parseInt(amount);
+            return !isNaN(num) && num > 0 && num <= 10000; // Max $10,000
+        }
+        
+        const rateLimitStore = {};
+        function isRateLimited() {
+            const now = Date.now();
+            const key = 'donation_attempts';
+            
+            if (!rateLimitStore[key]) {
+                rateLimitStore[key] = [];
+            }
+            
+            // Remove attempts older than 1 hour
+            rateLimitStore[key] = rateLimitStore[key].filter(time => now - time < 3600000);
+            
+            // Check if too many attempts
+            if (rateLimitStore[key].length >= 5) {
+                return true;
+            }
+            
+            // Add current attempt
+            rateLimitStore[key].push(now);
+            return false;
+        }
+
+        // Test Functions
+        function testEmailValidation() {
+            const email = document.getElementById('emailInput').value;
+            const isValid = validateEmail(email);
+            const resultsDiv = document.getElementById('emailResults');
+            
+            const resultClass = isValid ? 'pass' : 'fail';
+            const resultText = isValid ? 'PASS' : 'FAIL';
+            
+            resultsDiv.innerHTML = `
+                <div class="test-result ${resultClass}">
+                    <strong>${resultText}:</strong> Email "${email}" is ${isValid ? 'valid' : 'invalid'}
+                </div>
+            `;
+        }
+
+        function testSanitization() {
+            const input = document.getElementById('sanitizeInput').value;
+            const sanitized = sanitizeInput(input);
+            const resultsDiv = document.getElementById('sanitizeResults');
+            
+            resultsDiv.innerHTML = `
+                <div class="test-result pass">
+                    <strong>Original:</strong> "${input}"<br>
+                    <strong>Sanitized:</strong> "${sanitized}"
+                </div>
+            `;
+        }
+
+        function testDonationValidation() {
+            const amount = document.getElementById('donationInput').value;
+            const isValid = validateDonationAmount(amount);
+            const resultsDiv = document.getElementById('donationResults');
+            
+            const resultClass = isValid ? 'pass' : 'fail';
+            const resultText = isValid ? 'PASS' : 'FAIL';
+            
+            resultsDiv.innerHTML = `
+                <div class="test-result ${resultClass}">
+                    <strong>${resultText}:</strong> Donation amount $${amount} is ${isValid ? 'valid' : 'invalid'}
+                </div>
+            `;
+        }
+
+        function testRateLimiting() {
+            const resultsDiv = document.getElementById('rateLimitResults');
+            let results = '';
+            
+            // Test multiple attempts
+            for (let i = 0; i < 6; i++) {
+                const isLimited = isRateLimited();
+                const resultClass = isLimited ? 'fail' : 'pass';
+                const resultText = isLimited ? 'RATE LIMITED' : 'ALLOWED';
+                
+                results += `
+                    <div class="test-result ${resultClass}">
+                        <strong>Attempt ${i + 1}:</strong> ${resultText}
+                    </div>
+                `;
+            }
+            
+            resultsDiv.innerHTML = results;
+        }
+
+        function runAllTests() {
+            const resultsDiv = document.getElementById('allTestResults');
+            let allResults = '<h3>Automated Test Results:</h3>';
+            
+            // Test email validation
+            const emailTests = [
+                { email: 'test@example.com', expected: true },
+                { email: 'invalid-email', expected: false },
+                { email: 'user@domain.co.uk', expected: true },
+                { email: '@domain.com', expected: false }
+            ];
+            
+            allResults += '<h4>Email Validation Tests:</h4>';
+            emailTests.forEach(test => {
+                const result = validateEmail(test.email);
+                const passed = result === test.expected;
+                const resultClass = passed ? 'pass' : 'fail';
+                allResults += `
+                    <div class="test-result ${resultClass}">
+                        <strong>${passed ? 'PASS' : 'FAIL'}:</strong> "${test.email}" - Expected: ${test.expected}, Got: ${result}
+                    </div>
+                `;
+            });
+            
+            // Test sanitization
+            const sanitizeTests = [
+                { input: '<script>alert("xss")</script>', expected: 'scriptalert("xss")/script' },
+                { input: 'normal text', expected: 'normal text' },
+                { input: '<div>content</div>', expected: 'divcontent/div' }
+            ];
+            
+            allResults += '<h4>Input Sanitization Tests:</h4>';
+            sanitizeTests.forEach(test => {
+                const result = sanitizeInput(test.input);
+                const passed = result === test.expected;
+                const resultClass = passed ? 'pass' : 'fail';
+                allResults += `
+                    <div class="test-result ${resultClass}">
+                        <strong>${passed ? 'PASS' : 'FAIL'}:</strong> Input "${test.input}" → "${result}" (Expected: "${test.expected}")
+                    </div>
+                `;
+            });
+            
+            // Test donation validation
+            const donationTests = [
+                { amount: '100', expected: true },
+                { amount: '0', expected: false },
+                { amount: '15000', expected: false },
+                { amount: 'abc', expected: false }
+            ];
+            
+            allResults += '<h4>Donation Validation Tests:</h4>';
+            donationTests.forEach(test => {
+                const result = validateDonationAmount(test.amount);
+                const passed = result === test.expected;
+                const resultClass = passed ? 'pass' : 'fail';
+                allResults += `
+                    <div class="test-result ${resultClass}">
+                        <strong>${passed ? 'PASS' : 'FAIL'}:</strong> Amount $${test.amount} - Expected: ${test.expected}, Got: ${result}
+                    </div>
+                `;
+            });
+            
+            resultsDiv.innerHTML = allResults;
+        }
+    </script>
+</body>
+</html>
